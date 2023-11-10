@@ -1,0 +1,17 @@
+- name: Install Microsoft repository and keyring
+  hosts: all
+  tasks:
+    - name: Install dependencies
+      ansible.builtin.apt:
+        - wget
+        - gpg
+    
+    - name: Get Microsoft GPG key
+      ansible.builtin.get_url:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        dest: /etc/apt/keyrings/packages.microsoft.gpg
+
+    - name: somerepo | apt source
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main"
+        state: present
