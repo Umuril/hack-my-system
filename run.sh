@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -i inventory.yml playbooks/ping.yml
+ansible-playbook -i inventory.yml playbook.yml
